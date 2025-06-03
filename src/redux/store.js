@@ -3,6 +3,16 @@ import contactsReducer from "./contacts/slice";
 import filtersReducer from "./filters/slice";
 import authReducer from "./auth/slice";
 import persistReducer from "redux-persist/es/persistReducer";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+import persistStore from "redux-persist/es/persistStore";
+import storage from "redux-persist/lib/storage";
 
 const authPersitsConfig = {
   key: "auth",
@@ -23,3 +33,5 @@ export const store = configureStore({
       },
     }),
 });
+
+export const persistor = persistStore(store);

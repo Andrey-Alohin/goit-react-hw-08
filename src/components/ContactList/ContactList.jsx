@@ -5,7 +5,7 @@ import PlaceHolder from "../PlaceHolder/PlaceHolder";
 import {
   selectContacts,
   selectFiltredContacts,
-} from "../../redux/contactsSlice";
+} from "../../redux/contacts/selectors";
 
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
