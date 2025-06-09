@@ -5,6 +5,7 @@ import { Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { logIn } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
 const LogInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -13,10 +14,16 @@ const LogInSchema = Yup.object().shape({
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-  const handleLogIn = (values, actions) => {
-    dispatch(logIn(values));
-    console.log(values);
-    actions.resetForm();
+  const handleLogIn = async (values, actions) => {
+    try {
+      toast.loading("Logging in...", { id: "login" });
+      const response = await dispatch(logIn(values)).unwrap();
+      toast.success(`Welcome ${response.user.name}`, { id: "login" });
+    } catch {
+      toast.error("Something went wrong", { id: "login" });
+    } finally {
+      actions.resetForm();
+    }
   };
   return (
     <Formik

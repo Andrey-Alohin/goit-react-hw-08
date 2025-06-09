@@ -1,10 +1,11 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import toast from "react-hot-toast";
 
 const ContactValid = Yup.object({
   name: Yup.string()
@@ -22,9 +23,11 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
-
-    dispatch(addContact(values));
+    toast.promise(dispatch(addContact(values)).unwrap(), {
+      loading: "Loading",
+      success: `Added ${values.name} to your contacts`,
+      error: "Something went wrong",
+    });
     actions.resetForm();
   };
   return (

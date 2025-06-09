@@ -8,7 +8,11 @@ const HomePage = () => {
   const userName = useSelector(selectUserName);
   return (
     <Container>
-      <Typography variant="h1">
+      <Typography
+        variant="h3"
+        textAlign={"center"}
+        mt={{ sm: "40px", md: "60px", lg: "80px" }}
+      >
         Hello,{" "}
         {isLoggedIn ? userName : "for use this web site log in or register"}
       </Typography>

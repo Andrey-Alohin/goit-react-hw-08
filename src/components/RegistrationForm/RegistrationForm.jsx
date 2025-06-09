@@ -5,6 +5,7 @@ import { Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { register } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
 const RegisterSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,9 +20,16 @@ const RegisterSchema = Yup.object().shape({
 });
 export default function RegistrationForm() {
   const dispatch = useDispatch();
-  const handleSubmit = (values, actions) => {
-    dispatch(register(values));
-    actions.resetForm();
+  const handleSubmit = async (values, actions) => {
+    try {
+      toast.loading("Registration...", { id: "register" });
+      const response = await dispatch(register(values)).unwrap();
+      toast.success(`Welcome ${response.user.name}`, { id: "register" });
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      actions.resetForm();
+    }
   };
   return (
     <Formik
@@ -39,7 +47,7 @@ export default function RegistrationForm() {
         values,
         isSubmitting,
       }) => (
-        <Form>
+        <Form autoComplete="off">
           <Box
             display={"flex"}
             flexDirection={"column"}

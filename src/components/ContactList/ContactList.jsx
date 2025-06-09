@@ -1,37 +1,43 @@
 import Contact from "../Contact/Contact";
-import css from "./ContactList.module.css";
 import PlaceHolder from "../PlaceHolder/PlaceHolder";
 import {
   selectContacts,
   selectFiltredContacts,
 } from "../../redux/contacts/selectors";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import ListItem from "@mui/material/ListItem";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
 
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const visibleContacts = useSelector(selectFiltredContacts);
   return (
-    <Box>
+    <Paper square={false} elevation={24} sx={{ p: 2 }}>
+      <Typography variant="h6">Contacts list</Typography>
       {visibleContacts.length > 0 ? (
-        <Grid component={"ul"}>
+        <List sx={{ display: "block", listStyle: "none" }}>
           {visibleContacts.map(({ id, name, number }) => {
             return (
-              <ListItem component={"li"} key={id}>
+              <ListItem
+                width={"100%"}
+                key={id}
+                sx={{ bgcolor: "background.paper", boxShadow: "5" }}
+              >
                 <Contact name={name} number={number} id={id} />
               </ListItem>
             );
           })}
-        </Grid>
+        </List>
       ) : (
         <PlaceHolder
           hasContacts={contacts.length > 0}
           hasVisibleContacts={visibleContacts.length > 0}
         />
       )}
-    </Box>
+    </Paper>
   );
 };
 
