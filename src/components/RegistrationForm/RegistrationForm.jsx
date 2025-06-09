@@ -26,7 +26,7 @@ export default function RegistrationForm() {
       const response = await dispatch(register(values)).unwrap();
       toast.success(`Welcome ${response.user.name}`, { id: "register" });
     } catch {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", { id: "register" });
     } finally {
       actions.resetForm();
     }
