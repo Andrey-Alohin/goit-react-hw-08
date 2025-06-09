@@ -1,0 +1,88 @@
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { Form, Formik } from "formik";
+import { useDispatch } from "react-redux";
+import * as Yup from "yup";
+import { logIn } from "../../redux/auth/operations";
+
+const LogInSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().min(7, "Short").max(40, "Too long"),
+});
+
+export default function LoginForm() {
+  const dispatch = useDispatch();
+  const handleLogIn = (values, actions) => {
+    dispatch(logIn(values));
+    console.log(values);
+    actions.resetForm();
+  };
+  return (
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      validationSchema={LogInSchema}
+      validateOnBlur
+      validateOnChange
+      onSubmit={handleLogIn}
+    >
+      {({
+        values,
+        handleBlur,
+        handleChange,
+        errors,
+        touched,
+        isSubmitting,
+      }) => (
+        <Form>
+          <TextField
+            name="email"
+            label="Email"
+            type="email"
+            value={values.email}
+            autoComplete="email"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+            variant="outlined"
+            margin="dense"
+            size="small"
+          />
+          <TextField
+            name="password"
+            label="Password"
+            type="password"
+            value={values.password}
+            autoComplete="password"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.password && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
+            variant="outlined"
+            margin="dense"
+            size="small"
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            disabled={isSubmitting}
+            sx={{
+              px: 2,
+              display: "block",
+              width: "fit-content",
+              mx: "auto",
+              mt: 1,
+            }}
+          >
+            Log In
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+}

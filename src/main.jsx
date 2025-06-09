@@ -10,16 +10,58 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const theme = createTheme({
+  components: {
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: "#67b4ff",
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          transition: "color 300ms ease-in-out",
+          "&:hover": {
+            color: "#baedf9",
+          },
+          "&.Mui-selected": {
+            color: "#67b4ff",
+            cursor: "default",
+          },
+        },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          transition: "color 300ms ease-in-out, transform 300ms ease-in-out",
+          "&:hover": {
+            color: "#fff",
+            transform: "translate-x: 10px",
+          },
+        },
+      },
+    },
+  },
+});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter
-          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-        >
-          <App />
-        </BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <BrowserRouter
+            future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+          >
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
       </PersistGate>
     </Provider>
   </StrictMode>

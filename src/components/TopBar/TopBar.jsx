@@ -5,10 +5,18 @@ import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import Toolbar from "@mui/material/Toolbar";
+import UserMenu from "../UserMenu/UserMenu";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import AuthNav from "../AuthNav/AuthNav";
 
 const TopBar = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <AppBar position="sticky">
+    <AppBar
+      position="sticky"
+      sx={{ borderBottomRightRadius: 8, borderBottomLeftRadius: 8 }}
+    >
       <Container fixed>
         <Toolbar
           sx={{
@@ -27,6 +35,7 @@ const TopBar = () => {
             PhoneBook
           </Typography>
           <Navigation />
+          {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </Toolbar>
       </Container>
     </AppBar>

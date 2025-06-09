@@ -1,13 +1,14 @@
-import css from "./PlaceHolder.module.css";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const PlaceHolder = ({ hasContacts, hasVisibleContacts }) => {
   return (
-    <div className={css.placeHolderContainer}>
-      <h2 className={css.placeHolderText}>
+    <Box>
+      <Typography variant="h2" color="info" bgcolor={"transparent"}>
         {(hasContacts && !hasVisibleContacts && "No match") ||
           (!hasContacts && "No contacts. Please add!")}
-      </h2>
-    </div>
+      </Typography>
+    </Box>
   );
 };
 

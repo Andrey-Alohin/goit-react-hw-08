@@ -1,9 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import css from "./ContactForm.module.css";
-import { useId } from "react";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const ContactValid = Yup.object({
   name: Yup.string()
@@ -21,55 +22,82 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
+    console.log(values);
+
     dispatch(addContact(values));
     actions.resetForm();
   };
-  const nameFieldId = `name${useId()}`;
-  const telFieldId = `tel${useId()}`;
   return (
-    <div className={css.formContainer}>
+    <Box bgcolor={"Highlight"} p={1} borderRadius={2}>
       <Formik
-        initialValues={{ name: "", number: "" }}
         onSubmit={handleSubmit}
+        initialValues={{ name: "", number: "" }}
         validationSchema={ContactValid}
       >
-        <Form className={css.form}>
-          <div className={css.inputContainer}>
-            <label className={css.label} htmlFor={nameFieldId}>
-              Name
-            </label>
-            <Field
-              className={css.input}
-              type="text"
-              name="name"
-              id={nameFieldId}
-            />
-            <ErrorMessage
-              className={css.message}
-              name="name"
-              component="span"
-            />
-          </div>
-          <div className={css.inputContainer}>
-            <label className={css.label} htmlFor={telFieldId}>
-              Number
-            </label>
-            <Field
-              className={css.input}
-              type="tel"
-              name="number"
-              id={telFieldId}
-            />
-            <ErrorMessage
-              className={css.message}
-              name="number"
-              component="span"
-            />
-          </div>
-          <button type="submit">Add contact</button>
-        </Form>
+        {({
+          errors,
+          values,
+          handleBlur,
+          handleChange,
+          touched,
+          isSubmitting,
+        }) => (
+          <Form>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              p={3}
+              gap={2}
+              maxWidth={500}
+              m={"0 auto"}
+              bgcolor={"Background"}
+              borderRadius={2}
+            >
+              <TextField
+                type="text"
+                label="Name"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
+                variant="outlined"
+                margin="dense"
+                size="small"
+              />
+              <TextField
+                type="tel"
+                label="Number"
+                name="number"
+                value={values.number}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.number && Boolean(errors.number)}
+                helperText={touched.number && errors.number}
+                variant="outlined"
+                margin="dense"
+                size="small"
+              />
+              <Button
+                variant="contained"
+                type="submit"
+                disabled={isSubmitting}
+                sx={{
+                  bgcolor: "ButtonFace",
+                  color: "ButtonText",
+                  "&:hover": {
+                    bgcolor: "Background",
+                  },
+                }}
+              >
+                Add contact
+              </Button>
+            </Box>
+          </Form>
+        )}
       </Formik>
-    </div>
+    </Box>
   );
 };
 

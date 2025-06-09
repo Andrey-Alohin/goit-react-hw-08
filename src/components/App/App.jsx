@@ -1,15 +1,17 @@
-// import css from "./App.module.css";
-// import ContactList from "../ContactList/ContactList";
-import SearchBox from "../SearchBox/SearchBox";
-import ContactForm from "../ContactForm/ContactForm";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import Loader from "../Loader/Loader";
-import Error from "../Error/Error";
+import { lazy, useEffect } from "react";
 import { refreshUser } from "../../redux/auth/operations";
 import { Route, Routes } from "react-router-dom";
-import Home from "../../pages/Home/Home";
-import TopBar from "../TopBar/TopBar";
+import Layout from "../Layout/Layout";
+
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const RegistrationPage = lazy(() =>
+  import("../../pages/RegistrationPage/RegistrationPage ")
+);
+const LogInPage = lazy(() => import("../../pages/LogInPage/LogInPage"));
+const ContactsPage = lazy(() =>
+  import("../../pages/ContactsPage/ContactsPage")
+);
 
 function App() {
   const dispatch = useDispatch();
@@ -18,12 +20,15 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      <TopBar />
+    <Layout>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/login" element={<LogInPage />} />
+        <Route path="*" element={<div>Not found!</div>} />
       </Routes>
-    </>
+    </Layout>
   );
 }
 
