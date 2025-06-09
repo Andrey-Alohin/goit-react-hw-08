@@ -1,11 +1,10 @@
 import Box from "@mui/material/Box";
-import TopBar from "../TopBar/TopBar";
-import Loader from "../Loader/Loader";
+import AppBar from "../AppBar/AppBar";
 
 export default function Layout({ children }) {
   return (
     <Box>
-      <TopBar />
+      <AppBar />
       {children}
     </Box>
   );

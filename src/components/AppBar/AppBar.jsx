@@ -1,4 +1,4 @@
-import AppBar from "@mui/material/AppBar";
+import AppBarMui from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -10,10 +10,10 @@ import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import AuthNav from "../AuthNav/AuthNav";
 
-const TopBar = () => {
+const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <AppBar
+    <AppBarMui
       position="sticky"
       sx={{ borderBottomRightRadius: 8, borderBottomLeftRadius: 8 }}
     >
@@ -29,6 +29,7 @@ const TopBar = () => {
             variant="h5"
             noWrap
             component={Link}
+            fontSize={{ xs: "1em", sm: "2em" }}
             to="/"
             sx={{ color: "inherit", textDecoration: "none" }}
           >
@@ -38,8 +39,8 @@ const TopBar = () => {
           {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBarMui>
   );
 };
 
-export default TopBar;
+export default AppBar;

@@ -5,9 +5,10 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
 import Loader from "../Loader/Loader";
-import ResrtrictedRoute from "../ResrtrictedRoute/ResrtrictedRoute";
+import RestrictedRoute from "../RestrictedRoute/RestrictedRoute";
 import { Toaster } from "react-hot-toast";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
@@ -37,7 +38,7 @@ function App() {
             <Route
               path="/register"
               element={
-                <ResrtrictedRoute
+                <RestrictedRoute
                   redirectTo={"/"}
                   component={<RegistrationPage />}
                 />
@@ -46,7 +47,7 @@ function App() {
             <Route
               path="/login"
               element={
-                <ResrtrictedRoute
+                <RestrictedRoute
                   redirectTo={"/contacts"}
                   component={<LogInPage />}
                 />
@@ -61,7 +62,7 @@ function App() {
                 />
               }
             />
-            <Route path="*" element={<div>Not found!</div>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </Layout>
