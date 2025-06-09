@@ -23,6 +23,7 @@ const AppBar = () => {
             width: "100%",
             justifyContent: "space-between",
             alignItems: "center",
+            px: "0",
           }}
         >
           <Typography

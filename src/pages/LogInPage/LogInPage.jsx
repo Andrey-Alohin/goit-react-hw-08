@@ -4,7 +4,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 
 export default function LogInPage() {
   return (
-    <Box component={"section"}>
+    <Box component={"section"} py={5}>
       <Container>
         <LoginForm />
       </Container>

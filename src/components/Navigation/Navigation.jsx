@@ -14,6 +14,7 @@ const Navigation = () => {
   return (
     <Tabs
       value={currentPath}
+      variant="scrollable"
       aria-label="navigation tabs"
       role="navigation"
       textColor="secondary.contrastText"
@@ -21,6 +22,7 @@ const Navigation = () => {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
+        width: { xs: "107px", sm: "auto" },
       }}
     >
       <Tab label="Home" value="/" component={Link} to="/" />

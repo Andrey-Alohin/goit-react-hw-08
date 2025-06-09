@@ -18,13 +18,25 @@ const ContactList = () => {
     <Paper square={false} elevation={24} sx={{ p: 2 }}>
       <Typography variant="h6">Contacts list</Typography>
       {visibleContacts.length > 0 ? (
-        <List sx={{ display: "block", listStyle: "none" }}>
+        <List
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            listStyle: "none",
+            gap: { xs: "8px", sm: "16px", md: "24px" },
+          }}
+        >
           {visibleContacts.map(({ id, name, number }) => {
             return (
               <ListItem
                 width={"100%"}
                 key={id}
-                sx={{ bgcolor: "background.paper", boxShadow: "5" }}
+                sx={{
+                  bgcolor: "background.paper",
+                  boxShadow: "5",
+                  flexDirection: { xs: "column", sm: "row" },
+                  alignContent: "stretch",
+                }}
               >
                 <Contact name={name} number={number} id={id} />
               </ListItem>

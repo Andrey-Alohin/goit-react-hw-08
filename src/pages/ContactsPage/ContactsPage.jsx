@@ -20,7 +20,7 @@ export default function ContactsPage() {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
-    <Box component={"section"} m={3}>
+    <Box component={"section"} my={3}>
       <Container sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         <ContactForm />
         <SearchBox />
