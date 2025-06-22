@@ -17,7 +17,7 @@ const HomePage = () => {
           fontSize={{ xs: "2em", sm: "3em", md: "4em", lg: "5em" }}
         >
           Hello,{" "}
-          {isLoggedIn ? userName : "for use this web site log in or register"}
+          {isLoggedIn ? userName : "for use this website log in or register"}
         </Typography>
       </Container>
     </Box>

@@ -9,6 +9,7 @@ import { fetchContacts } from "../../redux/contacts/operations";
 import Loader from "../../components/Loader/Loader";
 import { selectError, selectLoading } from "../../redux/contacts/selectors";
 import Error from "../../components/Error/Error";
+import ManageDialog from "../../components/ManageDialog/ManageDialog";
 
 export default function ContactsPage() {
   const dispatch = useDispatch();
@@ -25,7 +26,12 @@ export default function ContactsPage() {
         <ContactForm />
         <SearchBox />
         <Loader isLoading={isLoading} />
-        {!isLoading && !error && <ContactList />}
+        {!isLoading && !error && (
+          <>
+            <ContactList />
+            <ManageDialog />
+          </>
+        )}
         {!isLoading && error && <Error message={error} />}
       </Container>
     </Box>

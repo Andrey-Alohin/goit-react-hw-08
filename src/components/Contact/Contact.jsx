@@ -1,25 +1,18 @@
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contacts/operations";
 import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
-import ListItemButton from "@mui/material/ListItemButton";
 import Link from "@mui/material/Link";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import toast from "react-hot-toast";
-import DeleteIcon from "@mui/icons-material/Delete";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Button from "@mui/material/Button";
+import { openDialog } from "../../redux/dialog/slice";
 
 const Contact = ({ name, number, id }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
-    toast.promise(dispatch(deleteContact(id)).unwrap(), {
-      loading: "Try to delete",
-      success: "Deleted",
-      error: "Try again",
-    });
+  const handleManage = () => {
+    dispatch(openDialog({ id, name, number }));
   };
 
   return (
@@ -74,17 +67,11 @@ const Contact = ({ name, number, id }) => {
         justifyContent={"flex-end"}
       >
         <Button
-          onClick={handleDelete}
-          sx={{
-            bgcolor: "#ef4444",
-            color: "ButtonText",
-            borderRadius: "4px",
-            "&:hover": { bgcolor: "#ff7979" },
-            m: "0",
-          }}
+          endIcon={<MoreVertIcon />}
+          onClick={handleManage}
+          variant="contained"
         >
-          <DeleteIcon />
-          Delete
+          Manage
         </Button>
       </Box>
     </>

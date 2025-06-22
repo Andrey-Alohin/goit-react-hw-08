@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import toast from "react-hot-toast";
 
-const ContactValid = Yup.object({
+export const ContactValid = Yup.object({
   name: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")

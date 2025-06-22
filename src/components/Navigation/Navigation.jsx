@@ -1,7 +1,7 @@
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useSelector } from "react-redux";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 const Navigation = () => {

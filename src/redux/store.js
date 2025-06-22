@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./auth/slice";
 import contactsReducer from "./contacts/slice";
 import filtersReducer from "./filters/slice";
-import authReducer from "./auth/slice";
+import dialogReducer from "./dialog/slice";
 import persistReducer from "redux-persist/es/persistReducer";
 import {
   FLUSH,
@@ -27,6 +28,7 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     contacts: contactsReducer,
     filters: filtersReducer,
+    dialog: dialogReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

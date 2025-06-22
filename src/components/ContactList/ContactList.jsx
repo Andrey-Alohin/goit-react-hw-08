@@ -4,12 +4,13 @@ import {
   selectContacts,
   selectFiltredContacts,
 } from "../../redux/contacts/selectors";
-import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
 import ListItem from "@mui/material/ListItem";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
+// import { TransitionGroup } from "react-transition-group";
+// import Collapse from "@mui/material/Collapse";
 
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
