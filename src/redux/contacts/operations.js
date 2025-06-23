@@ -29,7 +29,7 @@ export const editContact = createAsyncThunk(
   "/contacts/editContact",
   async ({ id, values }) => {
     const response = await axios.patch(`contacts/${id}`, values);
-    return response;
+    return response.data;
   }
 );
 
